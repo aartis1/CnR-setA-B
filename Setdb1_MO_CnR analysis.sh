@@ -1,5 +1,3 @@
-# CnR-setA-B
-#analyzing CnR data from Katie's MO experiment
 #!/bin/bash
 #SBATCH --job-name=CnR setA-B MO data		                        # Job name
 #SBATCH --partition=batch		                            # Partition (queue) name
@@ -21,4 +19,4 @@ then
     mkdir -p $OUTDIR
 fi
 
-Ashley 
+ 
