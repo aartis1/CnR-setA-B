@@ -2,7 +2,7 @@
 SBATCH --job-name=CnR_setab_mods		                        # Job name
 SBATCH --partition=batch		                            # Partition (queue) name
 SBATCH --ntasks=1			                                # Single task job
-SBATCH --cpus-per-task=6		                            # Number of cores per task - match this to the num_threads used by BLAST
+SBATCH --cpus-per-task=2		                            # Number of cores per task - match this to the num_threads used by BLAST
 SBATCH --mem=40gb			                                # Total memory for job
 SBATCH --time=30:00:00  		                            # Time limit hrs:min:sec
 SBATCH --output=/home/ara67776/work/CnR/Setdb1/error			    # Location of standard output and error log files (replace cbergman with your myid)
