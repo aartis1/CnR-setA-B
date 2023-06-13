@@ -19,8 +19,8 @@ then
     mkdir -p $OUTDIR
 fi
 # #download relevant reference genome and annotations
-# curl -s https://ftp.ensembl.org/pub/release-109/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna_rm.primary_assembly.fa.gz | gunzip -c > $OUTDIR/danio-refseq.fa
-# curl -s https://ftp.ensembl.org/pub/release-109/gtf/danio_rerio/Danio_rerio.GRCz11.109.gtf.gz | gunzip -c > $OUTDIR/danio_annotation.gtf
+curl -s https://ftp.ensembl.org/pub/release-109/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna_rm.primary_assembly.fa.gz | gunzip -c > $OUTDIR/danio-refseq.fa
+curl -s https://ftp.ensembl.org/pub/release-109/gtf/danio_rerio/Danio_rerio.GRCz11.109.gtf.gz | gunzip -c > $OUTDIR/danio_annotation.gtf
 
 #spike in for CnR
 curl -s https://ftp.ensembl.org/pub/release-109/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz | gunzip -c $OUTDIR/sacc_refseq.fa
