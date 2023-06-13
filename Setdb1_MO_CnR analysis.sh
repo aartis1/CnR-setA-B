@@ -1,7 +1,7 @@
-#!bin/sh
+#!bin/bash
 SBATCH --job-name=CnR_setab_MO		                        # Job name
 SBATCH --partition=batch		                            # Partition (queue) name
-SBATCH --ntasks=4	                                # Single task job
+SBATCH --ntasks=1	                                # Single task job
 SBATCH --cpus-per-task=24		                            # Number of cores per task - match this to the num_threads used by BLAST
 SBATCH --mem=60gb			                                # Total memory for job
 SBATCH --time=24:00:00  		                            # Time limit hrs:min:sec
