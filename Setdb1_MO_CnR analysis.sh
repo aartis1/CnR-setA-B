@@ -1,4 +1,4 @@
-!/bin/bash
+#!bin/sh
 SBATCH --job-name=CnR_setab_MO		                        # Job name
 SBATCH --partition=batch		                            # Partition (queue) name
 SBATCH --ntasks=1			                                # Single task job
