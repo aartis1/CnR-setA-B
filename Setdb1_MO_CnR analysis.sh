@@ -30,9 +30,8 @@ curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2
 
 #trim 3' ends of raw data before adapters are taken off
 module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
-mkdir $OUTDIR/CnR_histone_mods CnR_trimmed
 #starting with raw files in $OUTDIR/raw
-for infile in $OUTDIR/raw
+for infile in $OUTDIR/raw/*fastq.gz
 do
-  trim_galore --phred33 --fastqc --illumina --length 20 --output_dir $OUTDIR/CnR_histone_mods/trimmed $infile
+  trim_galore --phred33 --fastqc --illumina --length 20 --output_dir $OUTDIR/trimmed $infile
 done
