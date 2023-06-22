@@ -11,7 +11,7 @@ SBATCH --mail-type=ALL                            # Mail events (BEGIN, END, FAI
 
 
 #set output directory
-OUTDIR="/home/ara67776/work/CnR/Setdb1"
+OUTDIR="/scratch/ara67776/CnR_setAB"
 
 #if output directory doesn't exist, create it
 if [ ! -d $OUTDIR ]
@@ -25,17 +25,14 @@ curl -s https://ftp.ensembl.org/pub/release-109/gtf/danio_rerio/Danio_rerio.GRCz
 #spike in for CnR
 curl -s https://ftp.ensembl.org/pub/release-109/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz | gunzip -c > sacc_refseq.fa
 curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2/GCA_000005845.2_ASM584v2_genomic.fna.gz | gunzip -c > ecoli_refseq.fa
-#place all setdb1 raw data into raw directory
-mkdir /home/ara67776/work/CnR/Setdb1 raw
-mv 27_suvAB_setAB_MO_K9CnR_4.2023 raw
+#transfer raw files from local computer to the cluster
+
+
 #trim 3' ends of raw data before adapters are taken off
 module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
-mkdir /home/ara67776/work/CnR/Setdb1 CnR_trimmed
-#download samtools and bowtie to continue trimming
-module load SAMtools/1.10-GCC-8.3.0
-module load Bowtie2/2.4.1-GCC-8.3.0
-for infile in CnR_histone_mods/trimmed/*.gz
+mkdir $OUTDIR/CnR_histone_mods CnR_trimmed
+#starting with raw files in $OUTDIR/raw
+for infile in $OUTDIR/raw
 do
-base=$(basename ${infile} _trimmed.fq.gz)
-bowtie2 --local --very-sensitive-local --phred33 --no-unal -p 24 -x $OUTDIR/danio_ref -U $infile | samtools view -bq 20 | samtools sort - > $OUTDIR/CnR_histone_mods/bams/$base.danio_sort.bam
+  trim_galore --phred33 --fastqc --illumina --length 20 --output_dir $OUTDIR/CnR_histone_mods/trimmed $infile
 done
