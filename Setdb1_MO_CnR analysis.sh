@@ -1,13 +1,13 @@
 #!bin/bash
-SBATCH --job-name=CnR_setab_MO		                        # Job name
-SBATCH --partition=batch		                            # Partition (queue) name
-SBATCH --ntasks=1	                                # Single task job
-SBATCH --cpus-per-task=24		                            # Number of cores per task - match this to the num_threads used by BLAST
-SBATCH --mem=60gb			                                # Total memory for job
-SBATCH --time=24:00:00  		                            # Time limit hrs:min:sec
-SBATCH --output=/scratch/ara67776/CnR_setAB			    # Location of standard output and error log files (replace cbergman with your myid)
-SBATCH --mail-user=ara67776@uga.edu                    # Where to send mail (replace cbergman with your myid)
-SBATCH --mail-type=ALL                            # Mail events (BEGIN, END, FAIL, ALL)
+#SBATCH --job-name=CnR_setab_MO		                        # Job name
+#SBATCH --partition=batch		                            # Partition (queue) name
+#SBATCH --ntasks=1	                                # Single task job
+#SBATCH --cpus-per-task=24		                            # Number of cores per task - match this to the num_threads used by BLAST
+#SBATCH --mem=60gb			                                # Total memory for job
+#SBATCH --time=24:00:00  		                            # Time limit hrs:min:sec
+#SBATCH --output=/scratch/ara67776/CnR_setAB			    # Location of standard output and error log files (replace cbergman with your myid)
+#SBATCH --mail-user=ara67776@uga.edu                    # Where to send mail (replace cbergman with your myid)
+#SBATCH --mail-type=ALL                            # Mail events (BEGIN, END, FAIL, ALL)
 
 
 #set output directory
@@ -33,5 +33,5 @@ module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
 #starting with raw files in $OUTDIR/raw
 for infile in $OUTDIR/raw/*fastq.gz
 do
-  trim_galore --phred33 --fastqc --illumina --length 20 --output_dir $OUTDIR/trimmed $infile
+  trim_galore --phred33 --fastqc --illumina --length 20 -t 24 --output_dir $OUTDIR/trimmed $infile
 done
