@@ -11,27 +11,24 @@
 
 
 #set output directory
-OUTDIR="/scratch/ara67776/CnR_setAB"
+# OUTDIR="/scratch/ara67776/CnR_setAB"
+#
+# #if output directory doesn't exist, create it
+# if [ ! -d $OUTDIR ]
+# then
+#     mkdir -p $OUTDIR
+# fi
+# #download relevant reference genome and annotations
+# curl -s https://ftp.ensembl.org/pub/release-109/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna_rm.primary_assembly.fa.gz | gunzip -c > $OUTDIR/danio-refseq.fa
+# curl -s https://ftp.ensembl.org/pub/release-109/gtf/danio_rerio/Danio_rerio.GRCz11.109.gtf.gz | gunzip -c > $OUTDIR/danio_annotation.gtf
+# 
+# #spike in for CnR
+# curl -s https://ftp.ensembl.org/pub/release-109/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz | gunzip -c > sacc_refseq.fa
+# curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2/GCA_000005845.2_ASM584v2_genomic.fna.gz | gunzip -c > ecoli_refseq.fa
+# #transfer raw files from local computer to the cluster
+#
 
-#if output directory doesn't exist, create it
-if [ ! -d $OUTDIR ]
-then
-    mkdir -p $OUTDIR
-fi
-#download relevant reference genome and annotations
-curl -s https://ftp.ensembl.org/pub/release-109/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna_rm.primary_assembly.fa.gz | gunzip -c > $OUTDIR/danio-refseq.fa
-curl -s https://ftp.ensembl.org/pub/release-109/gtf/danio_rerio/Danio_rerio.GRCz11.109.gtf.gz | gunzip -c > $OUTDIR/danio_annotation.gtf
-
-#spike in for CnR
-curl -s https://ftp.ensembl.org/pub/release-109/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz | gunzip -c > sacc_refseq.fa
-curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2/GCA_000005845.2_ASM584v2_genomic.fna.gz | gunzip -c > ecoli_refseq.fa
-#transfer raw files from local computer to the cluster
-
-
-#trim 3' ends of raw data before adapters are taken off
+#trim ends of raw data before adapters are taken off (trimming paired ends)
 module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
 #starting with raw files in $OUTDIR/raw
-for infile in $OUTDIR/raw/*fastq.gz
-do
-  trim_galore --phred33 --fastqc --illumina --length 20 -t 24 --output_dir $OUTDIR/trimmed $infile
-done
+trim_galore --fastqc -j 24 --output_dir $OUTDIR/trimmed --paired $10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001.fastq.gz $10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001.fastq.gz
