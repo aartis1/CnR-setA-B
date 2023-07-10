@@ -36,4 +36,17 @@ fi
 #trim ends of raw data before adapters are taken off (trimming paired ends)
 module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
 #starting with raw files in $OUTDIR/raw
-trim_galore --fastqc -j 24 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001.fastq.gz $OUTDIR/raw/10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001.fastq.gz
+# trim_galore --fastqc -j 24 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001.fastq.gz $OUTDIR/raw/10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001.fastq.gz
+# trim_galore --fastqc -j 24 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001.fastq.gz $OUTDIR/raw/1_suvAB_MO_K9_4_5h_1_S1_L001_R2_001.fastq.gz
+trim_galore --fastqc -j 24 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001.fastq.gz $OUTDIR/raw/1_suvAB_MO_K9_4_5h_1_S1_L001_R2_001.fastq.gz
+
+
+
+
+
+
+
+
+
+
+#align reads to reference genome using bowtie
