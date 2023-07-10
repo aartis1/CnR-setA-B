@@ -8,7 +8,7 @@
 #SBATCH --output=/scratch/ara67776/CnR_setAB			    # Location of standard output and error log files (replace cbergman with your myid)
 #SBATCH --mail-user=ara67776@uga.edu                    # Where to send mail (replace cbergman with your myid)
 #SBATCH --mail-type=ALL                            # Mail events (BEGIN, END, FAIL, ALL)
-#SBATCH --error=/scratch/ara67776/CnR_setab_MO.%j.err     # Standard error log
+#SBATCH --output=/home/ara67776/work/error/log.%j			    # Location of standard output and error log files (replace cbergman with your myid)
 
 
 #set output directory
