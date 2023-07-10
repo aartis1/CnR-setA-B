@@ -10,7 +10,6 @@
 #SBATCH --mail-type=ALL                            # Mail events (BEGIN, END, FAIL, ALL)
 #SBATCH --output=/home/ara67776/work/error/log.%j			    # Location of standard output and error log files (replace cbergman with your myid)
 
-
 #set output directory
 # OUTDIR="/scratch/ara67776/CnR_setAB"
 #
