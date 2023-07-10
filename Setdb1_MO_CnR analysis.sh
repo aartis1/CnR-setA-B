@@ -8,6 +8,7 @@
 #SBATCH --output=/scratch/ara67776/CnR_setAB			    # Location of standard output and error log files (replace cbergman with your myid)
 #SBATCH --mail-user=ara67776@uga.edu                    # Where to send mail (replace cbergman with your myid)
 #SBATCH --mail-type=ALL                            # Mail events (BEGIN, END, FAIL, ALL)
+#SBATCH --error=/scratch/ara67776/CnR_setAB/error    # Standard error log
 
 
 #set output directory
@@ -38,7 +39,6 @@ module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
 #starting with raw files in $OUTDIR/raw
 # trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001.fastq.gz $OUTDIR/raw/10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001.fastq.gz
 # trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001.fastq.gz $OUTDIR/raw/1_suvAB_MO_K9_4_5h_1_S1_L001_R2_001.fastq.gz
-trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/2_suvAB_MO_K9_4_5h_2_S2_L001_R1_001.fastq.gz $OUTDIR/raw/2_suvAB_MO_K9_4_5h_2_S2_L001_R2_001.fastq.gz
 trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/3_suvAB_MO_K9_4_5h_3_S3_L001_R1_001.fastq.gz $OUTDIR/raw/3_suvAB_MO_K9_4_5h_3_S3_L001_R2_001.fastq.gz
 trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/4_setAB_MO_K9_4_5h_1_S4_L001_R1_001.fastq.gz $OUTDIR/raw/4_setAB_MO_K9_4_5h_1_S4_L001_R2_001.fastq.gz
 trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/5_setAB_MO_K9_4_5h_2_S5_L001_R1_001.fastq.gz $OUTDIR/raw/5_setAB_MO_K9_4_5h_2_S5_L001_R2_001.fastq.gz
@@ -46,4 +46,4 @@ trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/6_se
 trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/7_gfp_MO_K9_4_5h_1_S7_L001_R1_001.fastq.gz $OUTDIR/raw/7_gfp_MO_K9_4_5h_1_S7_L001_R2_001.fastq.gz
 trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/8_gfp_MO_K9_4_5h_2_S8_L001_R1_001.fastq.gz $OUTDIR/raw/8_gfp_MO_K9_4_5h_2_S8_L001_R2_001.fastq.gz
 trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/9_gfp_MO_K9_4_5h_3_S9_L001_R1_001.fastq.gz $OUTDIR/raw/9_gfp_MO_K9_4_5h_3_S9_L001_R2_001.fastq.gz
-#align reads to reference genome using bowtie
+#aligning trimmed reads to K-Met spike in using bowtie
