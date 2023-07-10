@@ -26,8 +26,13 @@
 # curl -s https://ftp.ensembl.org/pub/release-109/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz | gunzip -c > sacc_refseq.fa
 # curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2/GCA_000005845.2_ASM584v2_genomic.fna.gz | gunzip -c > ecoli_refseq.fa
 # #transfer raw files from local computer to the cluster
-#
 
+if [ -d "$OUTDIR/trimmed" ]
+then
+    echo "Directory $OUTDIR/trimmed exists."
+else
+  mkdir $OUTDIR/trimmed
+fi
 #trim ends of raw data before adapters are taken off (trimming paired ends)
 module load Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4
 #starting with raw files in $OUTDIR/raw
