@@ -45,18 +45,11 @@ OUTDIR="/scratch/ara67776/CnR_setAB"
 # trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/7_gfp_MO_K9_4_5h_1_S7_L001_R1_001.fastq.gz $OUTDIR/raw/7_gfp_MO_K9_4_5h_1_S7_L001_R2_001.fastq.gz
 # trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/8_gfp_MO_K9_4_5h_2_S8_L001_R1_001.fastq.gz $OUTDIR/raw/8_gfp_MO_K9_4_5h_2_S8_L001_R2_001.fastq.gz
 # trim_galore --fastqc -j 8 --output_dir $OUTDIR/trimmed --paired $OUTDIR/raw/9_gfp_MO_K9_4_5h_3_S9_L001_R1_001.fastq.gz $OUTDIR/raw/9_gfp_MO_K9_4_5h_3_S9_L001_R2_001.fastq.gz
-#checking to see if trimmed reads are real and not empty
-# if [ -s $10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001_val_1.fq.gz ] && [ -s $10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001_val_2.fq.gz ]; then
-#     echo "  $10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001_val_1.fq.gz and $10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001_val_2.fq.gz found and not empty"
-# else
-#     echo "  $10_gfp_MO_IgG_4_5h_1_S10_L001_R1_001_val_1.fq.gz and $10_gfp_MO_IgG_4_5h_1_S10_L001_R2_001_val_2.fq.gz was found to either not exist or be empty"
-#     echo "exiting"
-#     exit 0
-fi
-if [ -s $1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001_val_1.fq.gz ] && [ -s $1_suvAB_MO_K9_4_5h_1_S1_L001_R2_001_val_2.fq.gz ]; then
-    echo "  $1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001_val_1.fq.gz and $1_suvAB_MO_K9_4_5h_1_S1_L001_R2_001_val_2.fq.gz found and not empty"
-else
-    echo "  $1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001_val_1.fq.gz and $1_suvAB_MO_K9_4_5h_1_S1_L001_R2_001_val_2.fq.gz was found to either not exist or be empty"
-    echo "exiting"
-    exit 0
-fi
+#couting K-Met barcodes
+for barcode in TTCGCGCGTAACGACGTACCGT CGCGATACGACCGCGTTACGCG CGACGTTAACGCGTTTCGTACG CGCGACTATCGCGCGTAACGCG CCGTACGTCGTGTCGAACGACG CGATACGCGTTGGTACGCGTAA TAGTTCGCGACACCGTTCGTCG TCGACGCGTAAACGGTACGTCG TTATCGCGTCGCGACGGACGTA CGATCGTACGATAGCGTACCGA CGCATATCGCGTCGTACGACCG ACGTTCGACCGCGGTCGTACGA ACGATTCGACGATCGTCGACGA CGATAGTCGCGTCGCACGATCG CGCCGATTACGTGTCGCGCGTA ATCGTACCGCGCGTATCGGTCG CGTTCGAACGTTCGTCGACGAT TCGCGATTACGATGTCGCGCGA ACGCGAATCGTCGACGCGTATA CGCGATATCACTCGACGCGATA CGCGAAATTCGTATACGCGTCG CGCGATCGGTATCGGTACGCGC GTGATATCGCGTTAACGTCGCG TATCGCGCGAAACGACCGTTCG CCGCGCGTAATGCGCGACGTTA CCGCGATACGACTCGTTCGTCG GTCGCGAACTATCGTCGATTCG CCGCGCGTATAGTCCGAGCGTA CGATACGCCGATCGATCGTCGG CCGCGCGATAAGACGCGTAACG CGATTCGACGGTCGCGACCGTA TTTCGACGCGTCGATTCGGCGA ;
+	do
+	zgrep -c $barcode $1_suvAB_MO_K9_4_5h_1_S1_L001_R1_001_val_1.fq.gz >> $OUTDIR/kmet_1.tmp.txt
+done
+
+kmet_1=`awk '{s+=$1}END{print s}' $OUTDIR/kmet_1.tmp.txt`
+echo "  kmet count 1 is $kmet_1"
