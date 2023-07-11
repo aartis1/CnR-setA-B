@@ -233,3 +233,4 @@ else
     echo "                  " >> $OUTDIR/kmet_stats.txt
     echo "$base   $kmet_total" >> $OUTDIR/kmet_stats.txt
 fi
+###pick up on line 96 of the kmet spike in###
