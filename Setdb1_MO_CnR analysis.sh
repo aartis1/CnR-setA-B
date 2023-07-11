@@ -27,7 +27,7 @@
 # curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2/GCA_000005845.2_ASM584v2_genomic.fna.gz | gunzip -c > ecoli_refseq.fa
 # #transfer raw files from local computer to the cluster
 
-if [ -d "$OUTDIR/trimmed" ]
+if [ ! -d $OUTDIR/trimmed ]
 then
     echo "Directory $OUTDIR/trimmed exists."
 else
